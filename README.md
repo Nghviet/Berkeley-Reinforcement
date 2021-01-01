@@ -10,39 +10,38 @@ autograder_result.txt chứa result của 1 lần autograder, không phải lúc
 
 # Bài 1: 
 
-Cài theo công thức đưa ra trong bài
+QValue của 1 cặp state,action được tính bằng tổng điểm thưởng của hành động cộng với giá trị của state tiếp theo nhân với xác suất đạt được và discount
+
+Việc lấy hành động của 1 state đơn giản là lấy hành động có điểm QValue lớn nhất
 
 # Bài 2:
 
-Chạy lệnh thấy kết quả đưa ra giống a hơn là b
+Tắt noise, giữ nguyên discount = 0.9
 
 # Bài 3:
 
-Giống bài 1 nhưng đổi cách cập nhật weight
+Để chọn con đường xa thì discount lớn ( gần 1 và trên 1) , và ngược lại, con đường ngắn sẽ có discount nhỏ ( gần 0)
+Để tránh con đường gần vực thì livingReward = 0. Đề chon con đường đi xa gần vực thì em để livingReward < 0 vì  giá trị livingReward > 0 em thử đều chon điểm thưởng ở gần để đến
+
 
 # Bài 4:
 
-Bổ sung thêm 2 features
+Các cặp giá trị QValue (state,action) được lưu vào 1 map 2 chiều.
 
-Loop : Xài floodfill để tìm xem số region của 0 > 1 nghĩa là có loop
+Value của 1 state được tính là giá trị QValue lớn nhất của các legal action
 
-Upper : các pixel tập trung lên phía trên hơn 60% tổng số pixel
+Action của 1 state sẽ là ngẫu nhiên 1 hành động từ legal action mà có giá trị QValue(state,action) bằng với giá trị value của state đó
+
+Công thức update trong slide newValue = oldValue + alpha * (reward + discount * QValue(state,action) - oldValue)
 
 # Bài 5:
 
-Thay vì tự viết function cho predict, xài classify và lấy ra action được predict đầu tiên
+Nếu hàm flipCoin(epsilon) trả lại giá trị True thì hành động tiếp theo được trả lại là ngẫu nhiên từ những tập hợp nhưng hành động của state, ko thì vẫn tuân theo policy
 
 
-# Bài 6:
+# Bài 8:
 
-Các features được chọn
+Sửa lại các hàm getQValue và update trong ApproximateQAgent theo công thức được cung cấp trong đề bài
 
-foodCount : số lượng food còn lại
+Thêm một số biến trong PacmanQAgent do không thể sử dụng các giá trị alpha, gamma và epsilon trong ApproximateQAgent
 
-hunt : số ghost trong trạng thái scared
-
-minGhostDist : khoảng cách đến ghost ngắn nhất
-
-minScaredGhostDist :  khoảng cách đến ghost trong trạng thái scared ngắn nhất
-
-score : heuristic cho optimize
